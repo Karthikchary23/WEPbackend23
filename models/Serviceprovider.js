@@ -51,7 +51,11 @@ const serviceProviderSchema = new mongoose.Schema({
     customerVerificationOTP: {
         type: Number
     },
-    serviceProvidedCount: {
+    servicesProvidedCount: {
+        type: Number,
+        default: 0
+    },
+    servicesRejectedCount: {
         type: Number,
         default: 0
     },

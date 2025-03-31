@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 
 const CustomerSchema = new mongoose.Schema({
@@ -13,7 +14,8 @@ const CustomerSchema = new mongoose.Schema({
     resetPasswordOTP: { type: Number },
     customerVerificationOTP: { type: Number },
     ratings: { type: Number, default: 0 },
-    serviceProvidedCount: { type: Number, default: 0 },
+    servicesRecievedCount: { type: Number, default: 0 },
+    servicesRejectedCount: { type: Number, default: 0},
     serviceRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: "ServiceRequest" }],
 
     currentLocation: {
