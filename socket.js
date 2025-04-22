@@ -55,12 +55,21 @@ function init(server) {
           
             console.log("Request canceled:", data);
           });
+          
+          socket.on("providercurrentlocation", (data) => {
+            console.log("Provider current location:", data);
+            const { email, lat, lng } = data;
+            // Notify the customer with the provider's current location
+            io.to(email).emit("providerLocationUpdate", { lat, lng });
+        })
 
         // Remove provider when they disconnect
         socket.on("disconnect", () => {
             console.log("Provider disconnected:", socket.id);
             delete serviceProviders[socket.id];
         });
+
+        
     });
 }
 

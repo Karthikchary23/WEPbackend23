@@ -16,7 +16,7 @@ dotenv.config();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-const server = http.createServer(app); // Create HTTP server
+const server = http.createServer(app); 
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
