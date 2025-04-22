@@ -55,13 +55,19 @@ function init(server) {
           
             console.log("Request canceled:", data);
           });
-          
-          socket.on("providercurrentlocation", (data) => {
-            console.log("Provider current location:", data);
-            const { email, lat, lng } = data;
-            // Notify the customer with the provider's current location
-            io.to(email).emit("providerLocationUpdate", { lat, lng });
-        })
+
+         socket.on("providercurrentlocation", (data) => {
+    console.log("Provider current location received:", data);
+    const { location, customerEmail } = data;
+
+    // Notify the customer with the provider's current location
+    if (customerEmail) {
+        io.to(customerEmail).emit("providerLocationUpdate", location);
+        console.log(`Location sent to customer ${customerEmail}:`, location);
+    } else {
+        console.log("Customer email is missing in the data.");
+    }
+});
 
         // Remove provider when they disconnect
         socket.on("disconnect", () => {
